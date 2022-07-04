@@ -1,3 +1,4 @@
+# Remove index.php from URL
 Options +FollowSymlinks
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f

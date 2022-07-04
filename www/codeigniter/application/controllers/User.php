@@ -9,8 +9,8 @@ class User extends CI_Controller
     }
     public function index()
     {
-        $this->db->select("id, username, level");
-        $this->db->order_by("level", "desc");
+        $this->db->select("id, username, city");
+        $this->db->order_by("city", "desc");
         $query  =   $this->db->get('user')->result_array();
         echo "<pre>";
         print_r($query);
@@ -21,7 +21,7 @@ class User extends CI_Controller
         $data = array(
             "username" => "kaito",
             "password" => "1212445",
-            "level"    => "2",
+            "city"    => "2",
         );
         $this->db->insert("user", $data);
         echo "Insert thanh cong";

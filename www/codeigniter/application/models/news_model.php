@@ -1,9 +1,8 @@
 <?php
 class News_model extends CI_Model
 {
-    public function getList()
+    public function get_list()
     {
-        // Code
         echo 'Freetuts.net News Model';
     }
 }

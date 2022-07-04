@@ -17,7 +17,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://localhost/codeigniter/';
 
 /*
 |--------------------------------------------------------------------------
@@ -498,8 +498,3 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-
-
-$config['base_url'] = "";
-$config['total_rows'] = 0;
-$config['per_page'] = 0;

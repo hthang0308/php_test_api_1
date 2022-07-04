@@ -1,49 +1,75 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-/**
- *
- */
+
+
 class User_model extends CI_Model
 {
     public function read()
     {
-        $query = $this->db->query("select * from `user`");
+        //query user and remove the password
+        $this->db->select('id, username, email, city');
+        $this->db->from('users');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function read_by_id($id)
+    {
+        $query = $this->db->query("select * from `users` where id = $id");
         return $query->result_array();
     }
     public function insert($data)
     {
+        //check valid email
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        //if not exist this username, insert it
+        $query = $this->db->query("select * from `users` where username = '" . $data['username'] . "'");
 
-        $this->username = $data['username']; // please read the below note
-        $this->password = $data['password'];
-        // if ($data['level']) {
-        //     $this->level = $data['level'];
-        if ($this->db->insert('user', $this)) {
-            return 'Data is inserted successfully';
+        //hash password with bcrypt
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        if ($query->num_rows() == 0) {
+            $this->db->insert('users', $data);
+            return true;
         } else {
-            return "Error has occured";
+            return false;
         }
     }
     public function update($id, $data)
     {
+        unset($data['username']);
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        $result = $this->db->update('users', $data, array('id' => $id));
 
-        $this->username    = $data['username']; // please read the below note
-        $this->password  = $data['password'];
-        $this->level = $data['level'];
-        $result = $this->db->update('user', $this, array('id' => $id));
         if ($result) {
-            return "Data is updated successfully";
+            return true;
         } else {
-            return "Error has occurred";
+            return false;
         }
     }
     public function delete($id)
     {
-
-        $result = $this->db->query("delete from `user` where id = $id");
+        $result = $this->db->delete('users', array('id' => $id));
         if ($result) {
-            return "Data is deleted successfully";
+            return true;
         } else {
-            return "Error has occurred";
+            return false;
+        }
+    }
+    public function login($data)
+    {
+        $query = $this->db->query("select * from `users` where username = '" . $data['username'] . "'");
+        if ($query->num_rows() == 0) {
+            return false;
+        } else {
+            $row = $query->row();
+            if (password_verify($data['password'], $row->password)) {
+                return $row;
+            } else {
+                return false;
+            }
         }
     }
 }
