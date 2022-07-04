@@ -1,0 +1,15 @@
+CREATE TABLE `logs` (
+ `id` int(11) NOT NULL,
+ `uri` varchar(255) NOT NULL,
+ `method` varchar(6) NOT NULL,
+ `params` text,
+ `api_key` varchar(40) NOT NULL,
+ `ip_address` varchar(45) NOT NULL,
+ `time` int(11) NOT NULL,
+ `rtime` float DEFAULT NULL,
+ `authorized` varchar(1) NOT NULL,
+ `response_code` smallint(3) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `users` (`id`, `username`, `password`, `city`, `email`, `role`) VALUES (NULL, 'user1', '$2y$10$HCsRbk5u8GvAC93J2rQIcufIkSmAaRicq506NQ.rxosfd7Q5kS9bK', 'Ho Chi Minh', 'user1@gmail.com', 'user'), (NULL, 'user2', '$2y$10$tiCe3WJmEIVJM2xoLszWWONhARyDIt74kOLFbGxWRnDaWjx1ZoQ9G', 'Hai Phong', 'user2@gmail.com', 'user'), (NULL, 'user3', '$2y$10$MY7yW.y5hm.zkPmTfIWRRe3QInwY4lvt2bgkj/J32.11boJ/UsqB2', 'Binh Thuan', 'user3@gmail.com', 'user'), (NULL, 'user4', '$2y$10$jgnEZ4/DIJ0adbGJI3HvKuDgDj7KcujetvXXumewssS0b.NEucPr.', 'Nha Trang', 'user4@gmail.com', 'user'), (NULL, 'admin', '$2y$10$TK416pYpZh5i6K/w6oxbw.Lbb/pCk97ZkMvB/Dq3NhQc3tSRtjbs.', 'Da Lat', 'admin@gmail.com', 'admin'), (NULL, 'user99', '$2y$10$gKqtX9cuz0gRqkYbq5IJZ.FsAtAJvufw5xgNxHSz7d7LBRc5V8xYq', 'Tay Ninh', 'thang123@gmail.com', 'user')
