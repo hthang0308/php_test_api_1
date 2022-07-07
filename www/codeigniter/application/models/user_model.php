@@ -1,4 +1,7 @@
 <?php
+
+
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 
@@ -60,12 +63,13 @@ class User_model extends CI_Model
     }
     public function login($data)
     {
-        $query = $this->db->query("select * from `users` where username = '" . $data['username'] . "'");
+        $query = $this->db->query("select * from `users` where username = '" . $data['username'] . "' or email = '" . $data['username'] . "'");
         if ($query->num_rows() == 0) {
             return false;
         } else {
             $row = $query->row();
             if (password_verify($data['password'], $row->password)) {
+                unset($row->password);
                 return $row;
             } else {
                 return false;
