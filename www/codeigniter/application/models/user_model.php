@@ -10,7 +10,7 @@ class User_model extends CI_Model
     public function read()
     {
         //query user and remove the password
-        $this->db->select('id, username, email, city');
+        $this->db->select('id, username, email, city, phone');
         $this->db->from('users');
         $query = $this->db->get();
         return $query->result_array();

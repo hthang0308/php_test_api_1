@@ -69,7 +69,7 @@ class Api extends RestController
         if ($r) {
             $this->response(array('status' => 'success', 'message' => 'User inserted successfully'));
         } else {
-            $this->response(array('status' => 'error', 'message' => 'User not valid'));
+            $this->response(array('status' => 'error', 'message' => 'User already exists'));
         }
     }
     public function user_delete()
@@ -96,7 +96,6 @@ class Api extends RestController
                 'city' => $r->city
             );
             $jwt = JWT::encode($payload, $key, 'HS256');
-            //if data.remember_me is true, set cookie
             setcookie('jwt', $jwt, time() + (10), "/");
             $this->response(array('status' => 'success', 'token' => $jwt, 'user' => $r));
         } else {
